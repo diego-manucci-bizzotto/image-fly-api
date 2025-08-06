@@ -15,7 +15,7 @@ const pool = new Pool({
 async function removeOldImages() {
     try {
         await pool.query(
-            "DELETE FROM images WHERE created_at < NOW() - INTERVAL '8 hours'"
+            "DELETE FROM images WHERE created_at < NOW() - INTERVAL '5 hours'"
         );
     } catch (err) {
         console.error('Failed to remove old images:', err);
@@ -70,7 +70,7 @@ router.get('/:id', async (req, res) => {
 router.delete('/cleanup', async (req, res) => {
     try {
         const result = await pool.query(
-            "DELETE FROM images WHERE created_at < NOW() - INTERVAL '8 hours'"
+            "DELETE FROM images WHERE created_at < NOW() - INTERVAL '5 hours'"
         );
         res.json({ removed: result.rowCount });
     } catch (err) {
